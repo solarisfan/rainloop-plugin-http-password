@@ -126,7 +126,7 @@ class HttpChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Cha
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$xml = curl_exec( $ch );
 		$errorCode= curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		if ($errorCode == 404) {
+		if ($errorCode !== 200) {
 			$xml = false;
 		}
 		curl_close($ch);
