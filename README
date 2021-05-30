@@ -1,0 +1,13 @@
+<p>
+Password changing involve posting 2 HTTP requests with paramaters substitution and XML content is expected. Another URL is used to check for permission to change password for the given user.
+</p>
+<p>
+Please read the README.md for complete detail.
+</p>
+<p>
+Place holder parameters are:
+&percnt;USER&percnt; - email user ID without the domain name.
+&percnt;DOMAIN&percnt; - email domain name.
+&percnt;OLDPASSWORD&percnt; - existing password.
+&percnt;NEWPASSWORD&percnt; - proposed new password submitted.
+</p>
