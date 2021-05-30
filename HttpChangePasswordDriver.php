@@ -126,7 +126,7 @@ class HttpChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Cha
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$xml = curl_exec( $ch );
 		$errorCode= curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		if ($errorCode !== 200) {
+		if ($errorCode == 404) {
 			$xml = false;
 		}
 		curl_close($ch);
@@ -186,7 +186,9 @@ class HttpChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Cha
 		$sEmailDomain = \MailSo\Base\Utils::GetDomainFromEmail($sEmail);
 		$sTrailer = '';
 		if ($this->sChangePassword1URL) {
-			$xml = $this->IssueURL($this->sChangePassword1URL, $sEmailUser, $sEmailDomain, $sPrevPassword);
+			$xml = $this->IssueURL($this->sChangePassword1URL, 
+						$sEmailUser, $sEmailDomain, $sPrevPassword,
+						$sNewPassword);
 			if (!$xml) return false;
 			$token = simplexml_load_string($xml);
 			$ary = '';
@@ -196,7 +198,7 @@ class HttpChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Cha
 		}
 		if ($this->sChangePassword2URL) {
 			$xml = $this->IssueURL($this->sChangePassword2URL, 
-						$sEmailUser, $sEmailDomain, false, 
+						$sEmailUser, $sEmailDomain, $sPrevPassword, 
 						$sNewPassword, $sTrailer);
 			if (!$xml) return false;
 			$token = simplexml_load_string($xml);
