@@ -11,7 +11,7 @@ Place holder parameters are:
 
 All URL are expected to return XML.
 
-## 1. URL for allowing password change:
+## 1. URL for checking for permission for password change:
 Only user ID and domain name are passed. No password is send on this URL. 
 Expecting an xml with an entry <enabled>true|false</enabled>
 
