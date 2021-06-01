@@ -17,10 +17,10 @@ Expecting an xml with an entry <enabled>true|false</enabled>
 
 e.g. https://mail.example.com/permission?user=%USER%&domain=%DOMAIN%
 
-<?xml version="1.0" encoding="utf-8"?>
-<content>
-<enabled>true</enabled>
-</content>
+    <?xml version="1.0" encoding="utf-8"?>
+    <content>
+    <enabled>true</enabled>
+    </content>
 
 2) URL for changing password first pass:
 All information are passed including %USER%, %DOMAIN%, %OLDPASSWORD%, and %NEWPASSWORD%.
@@ -28,20 +28,19 @@ The entries in the XML content returned with be attached the the second URL.
 
 e.g. https://mail.example.com/PasswordChangePass1?user=%USER%&domain=%DOMAIN%&oldpassword=%OLDPASSWORD%
 
-<?xml version="1.0" encoding="utf-8"?>
-<content>
-<token>12345</token>
-</content>
+    <?xml version="1.0" encoding="utf-8"?>
+    <content>
+    <token>12345</token>
+    </content>
 
 3) URL for changing password second pass:
 All information are passed including %USER%, %DOMAIN%, %OLDPASSWORD%, and %NEWPASSWORD%.
 Expecting an xml with and entry <result>true|false<result>
 When result = false, assumed the password changing process failed.
 
-e.g. https://mail.example.com/PasswordChangePass1?user=%USER%&domain=%DOMAIN%&newpassword=%OLDPASSWORD%
-&token=12345
+e.g. https://mail.example.com/PasswordChangePass1?user=%USER%&domain=%DOMAIN%&newpassword=%OLDPASSWORD%&token=12345
 
-<?xml version="1.0" encoding="utf-8"?>
-<content>
-<result>true</result>
-</content>
+    <?xml version="1.0" encoding="utf-8"?>
+    <content>
+    <result>true</result>
+    </content>
