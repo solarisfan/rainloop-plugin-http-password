@@ -8,6 +8,7 @@ Place holder parameters are:
 - %DOMAIN% - email domain name
 - %OLDPASSWORD% - existing password
 - %NEWPASSWORD% - proposed new password submitted
+- %CLIENTIP% - Client IP
 
 All URL are expected to return XML.
 
