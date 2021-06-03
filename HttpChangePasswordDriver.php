@@ -37,9 +37,9 @@ class HttpChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Cha
 	 */
 	public function SetConfig($sPermissionURL, $sChangePassword1URL, $sChangePassword2URL)
 	{
-		$this->sPermissionURL = $sPermissionURL;
-		$this->sChangePassword1URL = $sChangePassword1URL;
-		$this->sChangePassword2URL = $sChangePassword2URL;
+		$this->sPermissionURL = trim($sPermissionURL);
+		$this->sChangePassword1URL = trim($sChangePassword1URL);
+		$this->sChangePassword2URL = trim($sChangePassword2URL);
 
 		return $this;
 	}
@@ -83,13 +83,14 @@ class HttpChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Cha
 	private function RewriteURI($sUri, $sUser, $sDomain, $sOldpassword=false, 
 								$sNewpassword=false) {
 		$qry=false;
-		$tok = strtok($sUri, '&');
+		$tok = strtok(trim($sUri), '&');
 		while ($tok !== false) {
 			if ($qry) $qry .= '&';
 			$tmp = str_replace('%USER%', urlencode($sUser), $tok, $cnt);
 			if ($cnt < 1) $tmp = str_replace('%DOMAIN%', urlencode($sDomain), $tok, $cnt);
 			if (($sOldpassword) && ($cnt < 1)) $tmp = str_replace('%OLDPASSWORD%', urlencode($sOldpassword), $tok, $cnt);
 			if (($sNewpassword) && ($cnt < 1)) $tmp = str_replace('%NEWPASSWORD%', urlencode($sNewpassword), $tok, $cnt);
+			if ($cnt < 1) $tmp = str_replace('%CLIENTIP%', urlencode($_SERVER['REMOTE_ADDR']), $tok, $cnt);
 			$qry .= $tmp;
 			$tok = strtok('&');
 		}
